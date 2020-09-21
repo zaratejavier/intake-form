@@ -32,7 +32,7 @@ function App() {
   ])
 
   const addItem = (item) => {  
-    debugger
+    // debugger
     setIntake([...intake, item])
   }
 
@@ -44,15 +44,14 @@ function App() {
         <p>{item.email}</p>
         <p>{item.birthDate}</p>
         <p>{item.contact}</p>
-
-
     </Card>
     ))
   }
 
   return (
-    <div className="App">
-      <h1>Contact us</h1>
+    <div className="body">
+      <h1 style={{ fontFamily: "Dancing Script" , padding:"30px", color:"white", fontSize: "40px"}}>Contact us</h1>
+      {/* font-family: 'Dancing Script', cursive; */}
       <IntakeForm addItem={addItem} />
       {renderInfo()}
       

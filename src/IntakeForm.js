@@ -3,6 +3,7 @@ import { Button, Form } from "semantic-ui-react"
 import moment from 'moment';
 import Axios from "axios"
 import TextField from '@material-ui/core/TextField';
+import "./IntakeForm.css"
 
 
 const IntakeForm = ({addItem}) => {
@@ -39,7 +40,7 @@ const IntakeForm = ({addItem}) => {
   }
 
   const handleSubmit = (e) => {
-    debugger;
+    // debugger;
     e.preventDefault()
     addItem(userInfo)
     message()
@@ -54,7 +55,7 @@ const IntakeForm = ({addItem}) => {
   }
 
   const isNameValid = () => {
-    return !name || name !== ""
+    return name !== "" && name !== null 
   }
 
   const isEmailValid = () => {
@@ -69,11 +70,15 @@ const IntakeForm = ({addItem}) => {
 
   const isFormValid = () => {
     return isNameValid() && isEmailValid() && (isBirthDateValid() || birthDate === '') && contact;
+
   }
 
   return (
-   <Form onSubmit={handleSubmit}>
-      <Form.Input 
+    <Form onSubmit={handleSubmit} className="container" size="huge" key="huge">
+
+      <Form.Input
+        className="form__name"
+        error={!isEmailValid()}
         label="Name"
         name="name"
         placeholder="Name"
@@ -81,28 +86,31 @@ const IntakeForm = ({addItem}) => {
         onChange={(e) => setName(e.target.value)}
         required
       />
-      <TextField
+      {/* <TextField
         error={!isEmailValid()}
         id="standard-error-helper-text"
         label="email"
         hintText="Email"
         onChange={(e) => setEmail(e.target.value)}
         helperText={errorText}
-        ></TextField>
-      {/* <Form.Input 
+        ></TextField> */}
+      <Form.Input 
+        className="form__name"
+        error={!isEmailValid()}
         label="Email"
         name="email"
         placeholder="Email"
         value={email}
-        onChange={(e) => onEmailChange(e.target.value)}
+        onChange={(e) => setEmail(e.target.value)}
         required
         type='email'
-      /> */}
+      />
       <Form.Input 
+        className="form__name"
         error={!isBirthDateValid()}
         label="Birth date"
         name="Birth date"
-        placeholder="MM/DD/YYYY"
+        placeholder="Format Date MM/DD/YYYY"
         value={birthDate}
         onChange={(e) => setBirthDate(e.target.value)}
       />
@@ -114,8 +122,18 @@ const IntakeForm = ({addItem}) => {
         required
       />
       <Button onClick={() => clearForm()}>Clear</Button>
-      <Button disabled={!isFormValid()}>Submit</Button>
+      <Button style={
+        isFormValid() ? { ...styles.green } : styles.red
+      } disabled={!isFormValid()}>Submit</Button>
     </Form>
   )
 }
+
+const styles = {
+  red: { color:"red" },
+  green: {
+    color:"green",
+  },
+}
+
 export default IntakeForm
