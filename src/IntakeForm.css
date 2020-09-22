@@ -5,7 +5,20 @@
   text-align: center;
   flex-direction: column;
   background-color: white;
- background-image: linear-gradient(to left, #ffecd2 0%, #fcb69f 100%);
+  background-image: linear-gradient(to left, #ffecd2 0%, #fcb69f 100%);
+  /* animation-duration: 3s;
+  animation-name: slidein2; */
+  
+}
+
+.buttons{
+  display: flex;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.buttonClear{
+  margin-right: 30px;
 }
 
 .form__name {
@@ -14,6 +27,26 @@
   flex-direction: column;
   padding: 30px;
   margin: 50px;
-  width: 100%;
-  
+  width: 100%;  
 }
+/* 
+@keyframes slidein2 {
+  from {
+    margin-right: 100%;
+    width: 100%; 
+  }
+
+  75% {
+    font-size: 150%;
+    margin-right: 25%;
+  }
+
+   50% {
+    font-size: 100%;
+    margin-right: 15%;
+  }
+
+  to {
+    margin-left: 0%;
+  }
+} */

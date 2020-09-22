@@ -2,13 +2,29 @@
   text-align: center;
   /* background-image: linear-gradient(to left, #ffecd2 0%, #fcb69f 100%);
    background-size: cover; */
-   background-size: cover;
+  background-size: cover;
   background-repeat: no-repeat;
   height: 75rem;
   width: 100%;
-   background-image: url('./Images/moon.jpg');
-    margin: 0;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+  background-image: url('./Images/moon.jpg');
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
 
+h1 {
+  animation-duration: 2s;
+  animation-name: slidein;
+}
+
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%; 
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
 }
