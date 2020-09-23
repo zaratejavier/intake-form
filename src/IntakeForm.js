@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Button, Form, Message } from "semantic-ui-react"
+import { Button, Form, Label, Message } from "semantic-ui-react"
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import moment from 'moment';
 import Axios from "axios"
@@ -80,7 +80,6 @@ const IntakeForm = ({addItem}) => {
 
   const isFormValid = () => {
     return isNameValid() && isEmailValid() && (isBirthDateValid() || birthDate === '') && contact;
-
   }
 
   const nameChangedFunc = (e) => {
@@ -112,9 +111,11 @@ const IntakeForm = ({addItem}) => {
         onChange={(e) => nameChangedFunc(e)}
         required
       />
-      <Message.Header style={nameChanged && !isNameValid() ? { display: "", color: "red" } : { display: "none" }}>
-        <ErrorOutlineIcon />Invalid name<ErrorOutlineIcon/>
-      </Message.Header>
+      <p className="label1" style={nameChanged && !isNameValid() ? { display: "", color: "red" } : { display: "none" }}>
+        <Label basic color='red' pointing>
+          Invalid name
+        </Label>
+      </p>
       
       {/* <Message.Header>We're sorry we can't apply that discount</Message.Header> */}
       <Form.Input 
@@ -128,9 +129,11 @@ const IntakeForm = ({addItem}) => {
         required
         type='email'
       />
-      <Message.Header style={emailChanged && !isEmailValid() ? { display: "", color: "red" } : { display: "none" }}>
-        <ErrorOutlineIcon/>Invalid Email<ErrorOutlineIcon/>
-      </Message.Header>
+      <p className="label1" style={emailChanged && !isEmailValid() ? { display: "", color: "red" } : { display: "none" }}>
+        <Label basic color='red' pointing>
+          Please enter a valid Email
+        </Label>
+      </p>
 
       <Form.Input 
         className="form__name"
@@ -141,9 +144,11 @@ const IntakeForm = ({addItem}) => {
         value={birthDate}
         onChange={(e) => DateChangedFunc(e)}
       />
-       <Message.Header style={dateChanged && !isBirthDateValid() ? { display: "", color: "red" } : { display: "none" }}>
-        <ErrorOutlineIcon/>Invalid Birthdate<ErrorOutlineIcon/>
-      </Message.Header>
+       <p className="label1" style={dateChanged && !isBirthDateValid() ? { display: "", color: "red" } : { display: "none" }}>
+        <Label basic color='red' pointing>
+          Please enter a valid date
+        </Label>
+      </p>
 
       <Form.Checkbox
         label='I agree to be contacted via email'
