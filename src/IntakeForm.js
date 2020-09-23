@@ -4,14 +4,16 @@ import "./IntakeForm.css"
 import moment from 'moment';
 import React, { useState } from "react"
 
-const IntakeForm = ({addItem}) => {
+
+const IntakeForm = () => {
   const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [birthDate, setBirthDate] = useState('')
   const [nameChanged, setNameChanged] = useState(false)
   const [emailChanged, setEmailChanged] = useState(false)
   const [dateChanged, setDateChanged] = useState(false)
-  const [email, setEmail] = useState('')
-  const [birthDate, setBirthDate] = useState('')
   const [contact, setContact] = useState(false)
+  const [message, setMessage ] = useState('');
 
   const userInfo = {
     id: Math.floor(Math.random() * 1000),
@@ -25,9 +27,9 @@ const IntakeForm = ({addItem}) => {
     e.preventDefault()
     Axios.post('https://my-json-server.typicode.com/JustUtahCoders/interview-users-api/users', userInfo)
       .then((res) => {
-        addItem(res.data)
         console.log(res.data)
-        message()
+        successMessage();
+        setTimeout(removeMessage, 3000);
         clearForm()
       })
       .catch((e) => {
@@ -36,9 +38,9 @@ const IntakeForm = ({addItem}) => {
     clearForm()
   }
 
-  const message = () => {
-    alert("Successful")
-  }
+  const removeMessage = () => {
+		setMessage('');
+	};
 
   const clearForm = () => {
     setName("")
@@ -49,6 +51,10 @@ const IntakeForm = ({addItem}) => {
     setEmailChanged(false)
     setDateChanged(false)
   }
+
+  const successMessage = () => {
+		setMessage(`Thank you ${name}! You will now be contacted via email.`);
+	};
 
   const isNameValid = () => {
     return name  && name.trim() 
@@ -153,6 +159,9 @@ const IntakeForm = ({addItem}) => {
           } disabled={!isFormValid()}>Submit</Button>
         </div>
       </div>  
+      <div className="message">
+				<p>{message}</p>
+			</div>
     </Form>
   )
 }

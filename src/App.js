@@ -1,19 +1,12 @@
 import './App.css';
 import IntakeForm from './IntakeForm';
-import React, { useState } from 'react';
+import React from 'react';
 
 function App() {
-  const [intake, setIntake] = useState([])
-
-  const addItem = (item) => {  
-    debugger
-    setIntake([...intake, item])
-  }
-
   return (
     <div className="body">
-      <h1 style={{ fontFamily: "Dancing Script" , padding:"30px", color:"white", fontSize: "40px"}}>Contact us</h1>
-      <IntakeForm addItem={addItem} />      
+      <h1 style={{ fontFamily: "Dancing Script" , padding:"30px", color:"white", fontSize: "40px"}}>New Particpant Form</h1>
+      <IntakeForm />      
     </div>
   );
 }
