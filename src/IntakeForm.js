@@ -1,19 +1,14 @@
-import React, { useState } from "react"
-import { Button, Form, Label, Message } from "semantic-ui-react"
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import moment from 'moment';
 import Axios from "axios"
+import { Button, Form, Label} from "semantic-ui-react"
 import "./IntakeForm.css"
-import { fade } from "@material-ui/core";
-
+import moment from 'moment';
+import React, { useState } from "react"
 
 const IntakeForm = ({addItem}) => {
   const [name, setName] = useState('')
   const [nameChanged, setNameChanged] = useState(false)
   const [emailChanged, setEmailChanged] = useState(false)
   const [dateChanged, setDateChanged] = useState(false)
-
-  const [errorText, setErrorText] = useState('')
   const [email, setEmail] = useState('')
   const [birthDate, setBirthDate] = useState('')
   const [contact, setContact] = useState(false)
@@ -26,32 +21,23 @@ const IntakeForm = ({addItem}) => {
     contact: contact
   }
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  //   debugger;
-  //   Axios.post('https://my-json-server.typicode.com/JustUtahCoders/interview-users-api/users', userInfo)
-  //     .then((res) => {
-  //       addItem(res.data)
-  //       console.log(res.data)
-  //       message()
-  //       clearForm()
-  //     })
-  //     .catch((e) => {
-  //       console.log(e)
-  //     })
-  //   clearForm()
-  // }
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    Axios.post('https://my-json-server.typicode.com/JustUtahCoders/interview-users-api/users', userInfo)
+      .then((res) => {
+        addItem(res.data)
+        console.log(res.data)
+        message()
+        clearForm()
+      })
+      .catch((e) => {
+        console.log(e)
+      })
+    clearForm()
+  }
 
   const message = () => {
     alert("Successful")
-  }
-
-  const handleSubmit = (e) => {
-    // debugger;
-    e.preventDefault()
-    addItem(userInfo)
-    message()
-    clearForm()
   }
 
   const clearForm = () => {
@@ -87,12 +73,12 @@ const IntakeForm = ({addItem}) => {
     setName(e.target.value)
   }
 
-  const EmailChangedFunc = (e) => {
+  const emailChangedFunc = (e) => {
     setEmailChanged(true)
     setEmail(e.target.value)
   }
 
-  const DateChangedFunc = (e) => {
+  const dateChangedFunc = (e) => {
     setDateChanged(true)
     setBirthDate(e.target.value)
   }
@@ -114,13 +100,11 @@ const IntakeForm = ({addItem}) => {
         onChange={(e) => nameChangedFunc(e)}
         required
       />
-      <p className="label1" style={showErrorStyle(nameChanged && !isNameValid())}>
+      <span className="label1" style={showErrorStyle(nameChanged && !isNameValid())}>
         <Label basic color='red' pointing>
-          Invalid name
+          The name cannot be empty
         </Label>
-      </p>
-      
-      {/* <Message.Header>We're sorry we can't apply that discount</Message.Header> */}
+      </span>
       <Form.Input 
         className="form__name"
         error={ emailChanged && !isEmailValid()}
@@ -128,16 +112,15 @@ const IntakeForm = ({addItem}) => {
         name="email"
         placeholder="Email"
         value={email}
-        onChange={(e) => EmailChangedFunc(e)}
+        onChange={(e) => emailChangedFunc(e)}
         required
         type='email'
       />
-      <p className="label1" style={showErrorStyle(emailChanged && !isEmailValid())}>
+      <span className="label1" style={showErrorStyle(emailChanged && !isEmailValid())}>
         <Label basic color='red' pointing>
           Please enter a valid Email
         </Label>
-      </p>
-
+      </span>
       <Form.Input 
         className="form__name"
         error={!isBirthDateValid()}
@@ -145,13 +128,13 @@ const IntakeForm = ({addItem}) => {
         name="Birth date"
         placeholder="Format Date MM/DD/YYYY"
         value={birthDate}
-        onChange={(e) => DateChangedFunc(e)}
+        onChange={(e) => dateChangedFunc(e)}
       />
-       <p className="label1" style={showErrorStyle(dateChanged && !isBirthDateValid())}>
+       <span className="label1" style={showErrorStyle(dateChanged && !isBirthDateValid())}>
         <Label basic color='red' pointing>
           Please enter a valid date
         </Label>
-      </p>
+      </span>
 
       <Form.Checkbox
         label='I agree to be contacted via email'
