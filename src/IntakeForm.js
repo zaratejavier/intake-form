@@ -97,6 +97,9 @@ const IntakeForm = ({addItem}) => {
     setBirthDate(e.target.value)
   }
 
+  const showErrorStyle = (show) => {
+    return show ? { display: "", color: "red" } : { display: "none" }
+  }
 
   return (
     <Form onSubmit={handleSubmit} className="container" size="huge" key="huge">
@@ -111,7 +114,7 @@ const IntakeForm = ({addItem}) => {
         onChange={(e) => nameChangedFunc(e)}
         required
       />
-      <p className="label1" style={nameChanged && !isNameValid() ? { display: "", color: "red" } : { display: "none" }}>
+      <p className="label1" style={showErrorStyle(nameChanged && !isNameValid())}>
         <Label basic color='red' pointing>
           Invalid name
         </Label>
@@ -120,7 +123,7 @@ const IntakeForm = ({addItem}) => {
       {/* <Message.Header>We're sorry we can't apply that discount</Message.Header> */}
       <Form.Input 
         className="form__name"
-        error={!isEmailValid()}
+        error={ emailChanged && !isEmailValid()}
         label="Email"
         name="email"
         placeholder="Email"
@@ -129,7 +132,7 @@ const IntakeForm = ({addItem}) => {
         required
         type='email'
       />
-      <p className="label1" style={emailChanged && !isEmailValid() ? { display: "", color: "red" } : { display: "none" }}>
+      <p className="label1" style={showErrorStyle(emailChanged && !isEmailValid())}>
         <Label basic color='red' pointing>
           Please enter a valid Email
         </Label>
@@ -144,7 +147,7 @@ const IntakeForm = ({addItem}) => {
         value={birthDate}
         onChange={(e) => DateChangedFunc(e)}
       />
-       <p className="label1" style={dateChanged && !isBirthDateValid() ? { display: "", color: "red" } : { display: "none" }}>
+       <p className="label1" style={showErrorStyle(dateChanged && !isBirthDateValid())}>
         <Label basic color='red' pointing>
           Please enter a valid date
         </Label>
@@ -159,7 +162,7 @@ const IntakeForm = ({addItem}) => {
       />
       <div className="buttons">
         <div className="buttonClear">
-          <Button onClick={() => clearForm()} >Clear</Button>
+          <Button type="button" onClick={() => clearForm()} >Clear</Button>
         </div>
         <div className="buttonSubmit">
           <Button style={
